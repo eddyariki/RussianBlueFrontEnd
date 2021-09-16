@@ -57,6 +57,7 @@ export default function Login() {
         points: res.data.data.points,
         loggedIn: true,
       });
+      localStorage.setItem("userId", res.data.data.userId);
       setSubmitted(3);
     } catch (e) {
       console.log(e);

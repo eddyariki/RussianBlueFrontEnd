@@ -5,6 +5,7 @@ import ReviewCard from "../../components/ReviewCard/ReviewCard";
 import { useReviewDetail } from "../../hooks/ReviewDetailsProvider";
 import { useHistory } from "react-router";
 import { djangoApiInstance } from "../../axios";
+import { ActionButton } from "../../components/Buttons/Buttons";
 
 const review = {
   reviewId: 0,
@@ -46,22 +47,93 @@ export default function Account() {
     };
     fetchReviews();
   }, []);
+  const logOut = () => {
+    localStorage.clear();
+    setUser({
+      username: "",
+      userId: -1,
+      points: 0,
+      loggedIn: false,
+    });
+  };
   return (
-    <div>
-      <div>
-        <h2>{user.username}</h2>
-        <h3>{user.points}</h3>
-      </div>
-
-      <div>
-        {reviews.map((e, idx) => {
-          return (
-            <div onClick={() => handleClick(e)}>
-              <ReviewCard review={e} key={idx} />
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    <AccountContainer>
+      <ProfileInfoContainer>
+        <ActionButtonContainer>
+          <ActionButton onClick={logOut} style={{ width: "fit-content" }}>
+            log out
+          </ActionButton>
+        </ActionButtonContainer>
+        <ProfileInfo>
+          <ProfileUsername>{user.username}</ProfileUsername>
+          <ProfilePoints>{user.points}pts</ProfilePoints>
+        </ProfileInfo>
+      </ProfileInfoContainer>
+      <ReviewsContainer>
+        <ReviewsSection>Reviews by You</ReviewsSection>
+        <ReviewsList>
+          {reviews.map((e, idx) => {
+            return (
+              <div onClick={() => handleClick(e)}>
+                <ReviewCard review={e} key={idx} />
+              </div>
+            );
+          })}
+        </ReviewsList>
+      </ReviewsContainer>
+    </AccountContainer>
   );
 }
+
+const AccountContainer = styled.div`
+  display: grid;
+  padding: var(--padding-s);
+`;
+
+const ProfileInfoContainer = styled.div`
+  display: grid;
+  grid-template-columns: auto auto;
+`;
+
+const ProfileInfo = styled.div`
+  display: grid;
+  grid-row: 1/2;
+`;
+const ProfileUsername = styled.div`
+  font-family: var(--font-title);
+  font-size: var(--font-size-xl);
+  justify-self: start;
+  color: var(--color-black);
+  padding-bottom: var(--padding-s);
+`;
+const ProfilePoints = styled.div`
+  font-family: var(--font-text);
+  font-size: var(--font-size-m);
+  justify-self: start;
+  color: var(--color-orange);
+  padding-bottom: var(--padding-m);
+`;
+
+const ActionButtonContainer = styled.div`
+  grid-column: 2/3;
+  justify-self: end;
+`;
+
+const ReviewsContainer = styled.div`
+  display: grid;
+`;
+
+const ReviewsSection = styled.div`
+  font-family: var(--font-text);
+  font-size: var(--font-size-m);
+  justify-self: start;
+  color: var(--color-black);
+  padding-bottom: var(--padding-s);
+  border-bottom: 1px solid var(--color-black);
+`;
+
+const ReviewsList = styled.div`
+  padding-top: var(--padding-s);
+  display: grid;
+  grid-row-gap: var(--padding-s);
+`;
