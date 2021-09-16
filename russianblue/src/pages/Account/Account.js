@@ -41,6 +41,7 @@ export default function Account() {
       const res = await djangoApiInstance.get(
         `/api/review/list/${user.userId}`
       );
+      console.log(res);
       setReviews(res.data);
     };
     fetchReviews();

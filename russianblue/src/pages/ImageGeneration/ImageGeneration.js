@@ -120,7 +120,7 @@ export default function ImageGeneration() {
       grad2 = p.color(r, g, b, 255);
       pg.textFont("Montserrat");
       pg.imageMode(p.CENTER);
-      qrImg = await generateQr(reviewDetails.itemCode, reviewDetails.authorId);
+      qrImg = await generateQr(reviewDetails.itemCode, reviewDetails.reviewId);
       imgX = pg.width / 2;
       imgY = pg.height / 2;
     };
@@ -258,6 +258,17 @@ export default function ImageGeneration() {
         qrImage.width / 2 + 150,
         pg.height - qrImage.height / 1.5
       );
+      pg.fill(214, 120, 69);
+      pg.rect(0, 0, pg.width, 120);
+      pg.stroke(251, 212, 167);
+      pg.fill(251, 212, 167);
+      pg.textSize(55);
+      pg.textStyle(p.ITALIC);
+      pg.text("Sharify Reviews", 20, 75);
+
+      pg.textSize(40);
+      pg.textStyle(p.BOLD);
+      pg.text(reviewDetails.author, pg.width - 200, 75);
       p.image(pg, 0, 0, p.width, p.height);
       if (download === true) {
         console.log(download);

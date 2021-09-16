@@ -37,12 +37,13 @@ export default function ReviewForm() {
     setSubmitted(1);
     console.log(title, content);
     try {
-      const res = await djangoApiInstance.post("/api/review", {
+      const res = await djangoApiInstance.post("/api/review/", {
         title,
         content,
         itemCode: selectedProduct.itemCode,
         userId: user.userId,
       });
+      console.log(res);
       if (res.data) {
         setReviewDetail({
           reviewId: res.data.reviewId,

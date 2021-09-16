@@ -30,7 +30,7 @@ export const GlobalStyle = createGlobalStyle`
         --font-size-l: 36px;
         --font-size-m: 24px;
         --font-size-s: 18px;
-
+        --font-size-xs: 14px;
         --link-color: white;
         --link-hover-color: grey;
         --link-border-color: purple;

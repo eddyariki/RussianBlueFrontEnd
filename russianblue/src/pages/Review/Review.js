@@ -58,14 +58,20 @@ export default function Review() {
           reviewId = reviewDetails.reviewId;
         }
         const res = await djangoApiInstance.get(`/api/review/${reviewId}`);
-        const reviewData = res.data;
+        const reviewData = res.data[0];
+        console.log(res);
+        const author = await (
+          await djangoApiInstance.get(`/profile/${reviewData.userId}`)
+        ).data.username;
         setReviewDetail({
           reviewId: reviewData.reviewId,
           title: reviewData.title,
           content: reviewData.content,
           itemCode: reviewData.itemCode,
           userId: reviewData.userId,
+          author,
         });
+
         const product = await rakutenApiInstance.get(rakutenItemSearchApiURL, {
           params: {
             format: "json",
@@ -140,11 +146,20 @@ export default function Review() {
             <StyledLinkContainer2>
               <StyledLink path="/editreviewform">Edit</StyledLink>
             </StyledLinkContainer2>
-            <ActionButton onClick={handleDelete}>Delete</ActionButton>
+            <ActionButton
+              onClick={handleDelete}
+              style={{ boxShadow: "var(--shadow-s)" }}
+            >
+              Delete
+            </ActionButton>
           </EditContainer>
         )}
       <ReviewContentContainer>
         <ReviewTitle>{reviewDetails.title}</ReviewTitle>
+        <ReviewAuthor>
+          written by:{" "}
+          <span style={{ fontWeight: "bold" }}>{reviewDetails.author}</span>
+        </ReviewAuthor>
         <ReviewContent>{reviewDetails.content}</ReviewContent>
       </ReviewContentContainer>
     </ReviewContainer>
@@ -188,12 +203,12 @@ const ReviewContainer = styled.div``;
 const ButtonsContainer = styled.div`
   padding-top: var(--spacing-s);
   display: grid;
-  justify-items: end;
+  justify-items: center;
   grid-row-gap: var(--spacing-s);
 `;
 
 const StyledLinkContainer = styled.div`
-  justify-self: end;
+  justify-self: center;
   height: var(--interactive-height);
   background-color: var(--color-special);
   border-radius: 5px;
@@ -219,6 +234,7 @@ const StyledLinkContainer2 = styled.div`
   display: grid;
   align-items: center;
   padding: var(--padding-s);
+  box-shadow: var(--shadow-s);
   & a {
     color: var(--color-beige);
   }
@@ -230,25 +246,42 @@ const EditContainer = styled.div`
   padding-top: var(--spacing-l);
   display: grid;
   grid-row-gap: var(--padding-s);
+  padding-left: var(--padding-s);
   justify-items: start;
 `;
 const Thanks = styled.div`
   font-family: var(--font-text);
   color: var(--color-orange);
-  justify-self: end;
+  justify-self: center;
 `;
 
 // const BuyProductButton = styled.button``;
 const ReviewContentContainer = styled.div`
   padding-top: var(--padding-s);
+  max-width: 95vw;
+  /* overflow-x: hidden; */
 `;
 const ReviewTitle = styled.div`
   font-family: var(--font-title);
   font-size: var(--font-size-xl);
   padding-left: var(--padding-s);
+  padding-bottom: var(--padding-s);
+  border-bottom: 2px solid var(--color-black);
+  width: 100vw;
 `;
-const ReviewContent = styled.div`
+
+const ReviewAuthor = styled.div`
   font-family: var(--font-text);
   padding-top: var(--padding-s);
   padding-left: var(--padding-m);
+  font-size: var(--font-size-xs);
+  max-width: 95vw;
+`;
+const ReviewContent = styled.div`
+  font-family: var(--font-text);
+  padding-top: var(--spacing-s);
+  padding-left: var(--padding-m);
+  font-size: var(--font-size-s);
+  max-width: 95vw;
+  padding-bottom: var(--padding-l);
 `;

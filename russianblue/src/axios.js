@@ -2,7 +2,7 @@ import { djangoApi, rakutenApi } from "./constants";
 import axios from "axios";
 export const djangoApiInstance = axios.create({
   baseURL: djangoApi,
-  timeout: 2000,
+  timeout: 20000,
   // headers: {'X-Custom-Header': 'foobar'}
 });
 

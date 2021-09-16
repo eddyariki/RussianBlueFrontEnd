@@ -47,15 +47,14 @@ export default function Login() {
       console.log(username, password);
 
       const res = await djangoApiInstance.post(`/user/${req}/`, {
-
         username,
         password,
       });
       console.log(res);
       setUser({
-        username: res.data.username,
-        userId: res.data.userId,
-        points: res.data.points,
+        username: res.data.data.username,
+        userId: res.data.data.userId,
+        points: res.data.data.points,
         loggedIn: true,
       });
       setSubmitted(3);
