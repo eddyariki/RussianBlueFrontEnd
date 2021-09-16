@@ -1,0 +1,57 @@
+export const defaultProduct = {
+  mediumImageUrls: [
+    {
+      imageUrl: "",
+    },
+    {
+      imageUrl: "",
+    },
+    {
+      imageUrl: "",
+    },
+  ],
+  pointRate: 0,
+  shopOfTheYearFlag: 0,
+  affiliateRate: 0,
+  shipOverseasFlag: 0,
+  asurakuFlag: 0,
+  endTime: "",
+  taxFlag: 0,
+  startTime: "",
+  itemCaption: "Item Caption",
+  catchcopy: "",
+  tagIds: [0],
+  smallImageUrls: [
+    {
+      imageUrl: "",
+    },
+    {
+      imageUrl: "",
+    },
+    {
+      imageUrl: "",
+    },
+  ],
+  asurakuClosingTime: "",
+  imageFlag: 1,
+  availability: 1,
+  shopAffiliateUrl: "",
+  itemCode: "",
+  postageFlag: 1,
+  itemName: "Item Name",
+  itemPrice: 1000,
+  pointRateEndTime: "",
+  shopCode: "wwj",
+  affiliateUrl: "",
+  giftFlag: 0,
+  shopName: "WWJ",
+  reviewCount: 7,
+  asurakuArea: "",
+  shopUrl: "Shop  URL",
+  creditCardFlag: 1,
+  reviewAverage: 4.57,
+  shipOverseasArea: "",
+  genreId: "0",
+  pointRateStartTime: "",
+  itemUrl: "item URL",
+};
