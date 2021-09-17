@@ -41,10 +41,6 @@ export const routes = [
     path: "/review",
     component: Review,
   },
-  // {
-  //   path: "/test",
-  //   component: GenerateProductImage,
-  // },
 ];
 
 export const privateRoutes = ["/account", "/reviewform", "/editreviewform"];

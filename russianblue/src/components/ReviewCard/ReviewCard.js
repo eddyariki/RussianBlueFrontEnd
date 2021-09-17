@@ -7,6 +7,7 @@ export default function ReviewCard({ review }) {
   const [imgUrl, setImgUrl] = useState("");
   useEffect(() => {
     const getImage = async () => {
+      // console.log(review);
       const res = await rakutenApiInstance.get(rakutenItemSearchApiURL, {
         params: {
           format: "json",
@@ -14,10 +15,14 @@ export default function ReviewCard({ review }) {
           applicationId: rakutenApiAppID,
         },
       });
+      console.log(res.data.Items[0].Item.mediumImageUrls[0].imageUrl);
+      console.log(res.data.Items[0]);
       setImgUrl(res.data.Items[0].Item.mediumImageUrls[0].imageUrl);
     };
-    getImage();
-  }, []);
+    if (review.reviewId !== -20) {
+      getImage();
+    }
+  }, [review.reviewId]);
   return (
     <ReviewCardContainer>
       <Image src={imgUrl} />

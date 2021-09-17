@@ -8,7 +8,7 @@ import { djangoApiInstance } from "../../axios";
 import { ActionButton } from "../../components/Buttons/Buttons";
 
 const review = {
-  reviewId: 0,
+  reviewId: -20,
   title: "TESTER",
   content: "CONTTTT",
   itemCode: "itemcode",
